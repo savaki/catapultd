@@ -1,6 +1,7 @@
 package agent
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -61,5 +62,20 @@ type Command struct {
 }
 
 func (c *Command) Execute(ctx *Context) error {
+	cmd, err := ctx.Command(c.Command, c.Args...)
+	if err != nil {
+		return err
+	}
+
+	if c.Payload != nil {
+		r := bytes.NewReader(c.Payload)
+		cmd.Stdin = r
+	}
+
+	// cmd.Stdout = ctx.Stdout
+	// cmd.Stderr = ctx.Stderr
+
+	// cmd.Start()
+	// cmd.Process.Kill()
 	return nil
 }

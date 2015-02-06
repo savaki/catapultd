@@ -6,16 +6,11 @@ import (
 	"os"
 
 	"github.com/codegangsta/cli"
-	"github.com/savaki/catapultd/config"
+	"github.com/savaki/catapultd/agent"
 )
 
-type Options struct {
-	Dir string
-	Url string
-}
-
-func Opts(c *cli.Context) *Options {
-	return &Options{
+func Opts(c *cli.Context) *agent.Options {
+	return &agent.Options{
 		Dir: c.String(FlagDir),
 		Url: c.String(FlagUrl),
 	}
@@ -48,19 +43,7 @@ func check(err error) {
 
 func Run(c *cli.Context) {
 	opts := Opts(c)
-
-	// Logic:
-	// 1. fetch log server and controller urls from directory server
-	// 2. push logs to log server
-	// 3. register with controller (poll until registration successful)
-	// 4. poll for commands
-
-	cfg, err := config.LoadFile(opts.Dir + "/catapultd.conf")
-	check(err)
-
-	agent := NewAgent(cfg)
-
-	err = agent.Register(opts.Url)
+	agent, err := agent.New(opts)
 	check(err)
 
 	for {

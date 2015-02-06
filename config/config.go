@@ -7,8 +7,8 @@ import (
 )
 
 type Config struct {
-	AgentId string `json:"agent-id"`
-	Token   string `json:"token"`
+	AgentId   string `json:"agent-id"`
+	AuthToken string `json:"auth-token"`
 }
 
 func Load(r io.Reader) (*Config, error) {

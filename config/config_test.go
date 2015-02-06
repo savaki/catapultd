@@ -11,14 +11,14 @@ import (
 
 func TestLoad(t *testing.T) {
 	Convey("Given a config", t, func() {
-		cfg := `{"agent-id":"abc", "token":"123"}`
+		cfg := `{"agent-id":"abc", "auth-token":"123"}`
 
 		Convey("When I call #Load", func() {
 			c, err := Load(strings.NewReader(cfg))
 
 			So(err, ShouldBeNil)
 			So(c.AgentId, ShouldEqual, "abc")
-			So(c.Token, ShouldEqual, "123")
+			So(c.AuthToken, ShouldEqual, "123")
 		})
 	})
 }
@@ -36,7 +36,7 @@ func TestLoadFile(t *testing.T) {
 
 			So(err, ShouldBeNil)
 			So(c.AgentId, ShouldEqual, "abc")
-			So(c.Token, ShouldEqual, "123")
+			So(c.AuthToken, ShouldEqual, "123")
 		})
 	})
 }

@@ -16,11 +16,16 @@ func NewAgent(opts *Options) (*Agent, error) {
 		return nil, err
 	}
 
+	logFunc, err := makeLogFunc(opts.Url)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Agent{
 		agentId:   agent,
 		authToken: authToken,
-		log:       DefaultLog,
-		poll:      nil,
+		log:       logFunc,
+		poll:      pollFunc,
 	}
 }
 

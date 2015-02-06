@@ -1,28 +1,33 @@
 package main
 
-import "github.com/savaki/catapultd/config"
-
 type Agent struct {
-	Hosts   *Hosts
-	AgentId string
-	Token   string
-	Poll    PollFunc
-	Log     LogFunc
+	agentId   string
+	authToken string
+	log       LogFunc
 }
 
 type Link struct {
 	Href string `json:"href"`
 }
 
-func NewAgent(cfg *config.Config) *Agent {
-	agent := &Agent{}
-
-	if cfg != nil {
-		agent.AgentId = cfg.AgentId
-		agent.Token = cfg.Token
+func NewAgent(opts *Options) (*Agent, error) {
+	pollFunc, err := makePollFunc(opts.Url)
+	if err != nil {
+		return nil, err
 	}
 
-	return agent
+	return &Agent{
+		agentId:   agent,
+		authToken: authToken,
+		log:       DefaultLog,
+		poll:      nil,
+	}
+}
+
+func makePollFunc(url string) (PollFunc, error) {
+	return func() (*Command, error) {
+		return nil, nil
+	}, nil
 }
 
 func (a *Agent) Execute(command *Command) error {

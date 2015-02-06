@@ -16,9 +16,14 @@ func TestLoad(t *testing.T) {
 		Convey("When I call #Load", func() {
 			c, err := Load(strings.NewReader(cfg))
 
-			So(err, ShouldBeNil)
-			So(c.AgentId, ShouldEqual, "abc")
-			So(c.AuthToken, ShouldEqual, "123")
+			Convey("Then I expect no errors", func() {
+				So(err, ShouldBeNil)
+			})
+
+			Convey("And I expect the returned config to have its properties set", func() {
+				So(c.AgentId, ShouldEqual, "abc")
+				So(c.AuthToken, ShouldEqual, "123")
+			})
 		})
 	})
 }
@@ -34,9 +39,14 @@ func TestLoadFile(t *testing.T) {
 		Convey("When I call #LoadFile", func() {
 			c, err := LoadFile(filename)
 
-			So(err, ShouldBeNil)
-			So(c.AgentId, ShouldEqual, "abc")
-			So(c.AuthToken, ShouldEqual, "123")
+			Convey("Then I expect no errors", func() {
+				So(err, ShouldBeNil)
+			})
+
+			Convey("And I expect the returned config to have its properties set", func() {
+				So(c.AgentId, ShouldEqual, "abc")
+				So(c.AuthToken, ShouldEqual, "123")
+			})
 		})
 	})
 }

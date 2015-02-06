@@ -12,7 +12,7 @@ type Link struct {
 }
 
 type Hosts struct {
-	LogServer Link `json:"logger"`
+	LogServer Link `json:"log-server"`
 	ApiServer Link `json:"api-server"`
 }
 

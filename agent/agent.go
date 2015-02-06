@@ -49,9 +49,7 @@ func New(opts *Options) (*Agent, error) {
 }
 
 func makePollFunc(url string) (PollFunc, error) {
-	return func() (*Command, error) {
-		return nil, nil
-	}, nil
+	return NoopPollFunc, nil
 }
 
 func makeLogFunc(url string) (LogFunc, error) {

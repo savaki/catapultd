@@ -8,10 +8,6 @@ type Agent struct {
 	Execute   ExecuteFunc
 }
 
-type Link struct {
-	Href string `json:"href"`
-}
-
 type Options struct {
 	Url string
 	Dir string

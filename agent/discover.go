@@ -7,6 +7,10 @@ import (
 
 //---------------------------------------------------------------
 
+type Link struct {
+	Href string `json:"href"`
+}
+
 type Hosts struct {
 	LogServer Link `json:"logger"`
 	ApiServer Link `json:"api-server"`
